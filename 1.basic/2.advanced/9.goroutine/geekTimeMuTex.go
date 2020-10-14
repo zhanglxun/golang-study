@@ -22,4 +22,5 @@ func main() {
 	// 等待10个goroutine完成
 	wg.Wait()
 	fmt.Println(count)
+
 }
