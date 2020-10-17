@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-//golan 中的切片
+//golang 中的切片,通过make 创建
 
 func main() {
 
@@ -20,6 +20,7 @@ func main() {
 
 	var slice2 []int = make([]int, 5)
 
+	// 赋值会覆盖，未赋值的，则为int 的默认值0
 	slice2[0] = 3
 	slice2[1] = 2
 	slice2[2] = 9

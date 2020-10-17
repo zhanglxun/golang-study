@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 
 	ch := make(chan string, 9)
-	var s string
+	var s string = "a"
 	//s = <-ch
 	ch <- "hello"
 	ch <- "world"
