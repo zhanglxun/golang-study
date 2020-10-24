@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"golangStudy/3.apiServer/config"
+	"golangStudy/3.apiServer/model"
 	"golangStudy/3.apiServer/router"
 	"net/http"
 	"time"
@@ -23,6 +24,10 @@ func main() {
 	if err := config.Init(*cfg); err != nil {
 		panic(err)
 	}
+
+	// init db
+	model.DB.Init()
+	defer model.DB.Close()
 
 	// Set gin mode.
 	gin.SetMode(viper.GetString("runmode"))

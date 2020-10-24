@@ -1,12 +1,11 @@
 package router
 
 import (
-	"net/http"
-
-	"golangStudy/3.apiServer/handler/sd"
-	"golangStudy/3.apiServer/router/middleware"
-
 	"github.com/gin-gonic/gin"
+	"golangStudy/3.apiServer/handler/sd"
+	"golangStudy/3.apiServer/handler/user"
+	"golangStudy/3.apiServer/router/middleware"
+	"net/http"
 )
 
 // Load loads the middlewares, routes, handlers.
@@ -21,6 +20,19 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	g.NoRoute(func(c *gin.Context) {
 		c.String(http.StatusNotFound, "The incorrect API route.")
 	})
+
+	/**
+	请求body 需要用此方式
+	{
+	    "username":"admin",
+	    "password":"admin"
+	}
+	*/
+	u := g.Group("/v1/user")
+	{
+		u.POST("", user.Create)
+		u.POST("/:username", user.UserInfo)
+	}
 
 	// The health check handlers
 	svcd := g.Group("/sd")
