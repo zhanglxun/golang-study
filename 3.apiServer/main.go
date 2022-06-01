@@ -22,7 +22,7 @@ func main() {
 	pflag.Parse()
 
 	if err := config.Init(*cfg); err != nil {
-		panic(err)
+		//panic(err)
 	}
 
 	// init db
