@@ -29,8 +29,8 @@ func main() {
 	// 自动迁移
 	db.AutoMigrate(&UserInfo{})
 
-	u1 := UserInfo{1, "七米", "男", "篮球"}
-	u2 := UserInfo{2, "沙河娜扎", "女", "足球"}
+	u1 := UserInfo{3, "七米2", "男", "篮球"}
+	u2 := UserInfo{4, "沙河娜扎2", "女", "足球"}
 	// 创建记录
 	db.Create(&u1)
 	db.Create(&u2)
@@ -46,6 +46,6 @@ func main() {
 	// 更新
 	db.Model(&u).Update("hobby", "双色球")
 	// 删除
-	db.Delete(&u)
+	//db.Delete(&u)
 
 }
