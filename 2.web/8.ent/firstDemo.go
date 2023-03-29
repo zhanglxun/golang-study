@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
+	"entgo.io/ent/dialect/sql"
+	"fmt"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"golangStudy/2.web/8.ent/ent/accounts"
 	"golangStudy/2.web/8.ent/ent/cwebsite"
-
 	//"entgo.io/ent"
-	//_ "github.com/go-sql-driver/mysql"
+	//"entgo.io/ent/entql/predicate"
 	"golangStudy/2.web/8.ent/ent"
 	"log"
 )
@@ -78,6 +79,19 @@ func SelectCWebsite(ctx context.Context, client *ent.Client) (*ent.CWebsite, err
 
 	cwebsiteObj, _ := client.CWebsite.Query().Where(cwebsite.ID(3689)).First(ctx)
 
+	cwebsiteObjs, _ := client.CWebsite.
+		Query().
+		Where(func(selector *sql.Selector) {
+			selector.Where(sql.EQ("category", 1))
+			selector.Where(sql.EQ("type", 1))
+		}).All(ctx)
+
 	println(cwebsiteObj.WebsiteName + "-" + cwebsiteObj.WebsiteURL)
+
+	for i, value := range cwebsiteObjs {
+
+		fmt.Printf("slice at %d is : %s \n", i, value.WebsiteName+"-"+value.WebsiteURL)
+	}
+
 	return cwebsiteObj, nil
 }
